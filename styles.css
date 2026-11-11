@@ -1,0 +1,391 @@
+/* Pumpkin Night — dark Halloween theme.
+   Palette: near-black purple background, pumpkin orange, lilac purple.
+   No external images or fonts; all decoration is CSS or inline SVG. */
+
+:root {
+  --bg: #150a1e;
+  --bg-2: #1e0f2b;
+  --card: #241433;
+  --card-border: #3d2354;
+  --text: #f5eefb;
+  --muted: #c9b3dd;
+  --orange: #ff7a1a;
+  --orange-light: #ffa53b;
+  --purple: #9b6bff;
+  --purple-soft: #b79bff;
+  --green: #7ddb8a;
+  --danger: #ff6b6b;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+/* Header */
+
+.site-header {
+  padding: 28px 18px 20px;
+  background: linear-gradient(180deg, #2a1238 0%, var(--bg) 100%);
+  border-bottom: 2px solid var(--card-border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.logo { width: 64px; height: 64px; flex: none; }
+.ghost {
+  width: 44px;
+  height: 52px;
+  flex: none;
+  margin-left: auto;
+  animation: float 3.2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+h1 {
+  margin: 0;
+  font-size: 2rem;
+  letter-spacing: 0.5px;
+  color: var(--orange-light);
+}
+
+.tagline { margin: 2px 0 0; color: var(--muted); }
+
+/* Countdown */
+
+.countdown {
+  max-width: 1080px;
+  margin: 18px auto 0;
+  padding: 14px 18px;
+  background: var(--bg-2);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.countdown-label { margin: 0 0 6px; color: var(--muted); font-size: 0.95rem; }
+
+.countdown-numbers {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.countdown-unit {
+  min-width: 72px;
+  padding: 6px 10px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+}
+
+.countdown-unit span {
+  display: block;
+  font-size: 1.7rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--orange-light);
+}
+
+.countdown-unit small { color: var(--muted); }
+.countdown-target { margin: 8px 0 0; color: var(--muted); font-size: 0.9rem; }
+
+/* Layout */
+
+main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 18px;
+  display: grid;
+  gap: 18px;
+}
+
+@media (min-width: 860px) {
+  main { grid-template-columns: 1fr 1fr; }
+  #route-section, #album-section { grid-column: 1; }
+  #costume-section, #checklist-section { grid-column: 2; }
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+
+.card h2 { margin: 0 0 4px; font-size: 1.35rem; color: var(--orange-light); }
+.card h3 { margin: 18px 0 8px; font-size: 1.05rem; color: var(--purple-soft); }
+.section-note { margin: 0 0 14px; color: var(--muted); font-size: 0.95rem; }
+
+/* Forms */
+
+.form-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 560px) {
+  .form-grid { grid-template-columns: 1fr 1fr; }
+  .form-grid .btn { grid-column: 1 / -1; }
+}
+
+.field label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+input, select {
+  width: 100%;
+  padding: 9px 10px;
+  background: var(--bg-2);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  color: var(--text);
+  font: inherit;
+}
+
+input:focus, select:focus, button:focus {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}
+
+input[type="file"] { padding: 6px; }
+
+.btn {
+  padding: 10px 16px;
+  background: var(--orange);
+  color: #1c0b26;
+  border: none;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn:hover { background: var(--orange-light); }
+.btn-small { padding: 8px 12px; }
+.btn-ghost {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--card-border);
+  font-weight: 400;
+}
+.btn-ghost:hover { background: var(--bg-2); color: var(--text); }
+
+.icon-btn {
+  padding: 4px 8px;
+  background: var(--bg-2);
+  color: var(--text);
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  font: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.icon-btn:hover { border-color: var(--orange); }
+.icon-btn.danger:hover { border-color: var(--danger); color: var(--danger); }
+.icon-btn:disabled { opacity: 0.35; cursor: default; }
+
+/* Route list */
+
+.total { margin: 14px 0 8px; font-weight: 700; }
+
+.stop-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.stop-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--bg-2);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+}
+
+.stop-order {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  line-height: 26px;
+  text-align: center;
+  background: var(--orange);
+  color: #1c0b26;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.stop-body { flex: 1; min-width: 0; }
+.stop-body strong { display: block; }
+.stop-body p { margin: 2px 0 0; color: var(--muted); font-size: 0.9rem; }
+.stop-minutes { color: var(--orange-light); font-weight: 700; }
+
+.stop-actions { display: flex; gap: 4px; flex: none; }
+
+/* Costume matcher */
+
+.member-list {
+  list-style: none;
+  margin: 0 0 6px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.member-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 6px 6px 12px;
+  background: var(--bg-2);
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  font-size: 0.95rem;
+}
+
+.empty-note { color: var(--muted); }
+
+.theme-grid {
+  display: grid;
+  gap: 10px;
+}
+@media (min-width: 560px) {
+  .theme-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.theme-card {
+  padding: 12px;
+  background: var(--bg-2);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+}
+.theme-card.top {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 1px var(--orange);
+}
+.theme-card h4 { margin: 0 0 4px; color: var(--orange-light); }
+.theme-card p { margin: 0 0 8px; color: var(--muted); font-size: 0.9rem; }
+.theme-card ul { margin: 0; padding-left: 18px; font-size: 0.95rem; }
+.theme-score { font-weight: 700; color: var(--green); }
+
+.idea-list { display: grid; gap: 8px; }
+.idea-row {
+  padding: 10px 12px;
+  background: var(--bg-2);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+}
+
+/* Photo album */
+
+.storage-note { color: var(--muted); font-size: 0.9rem; }
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.photo-item {
+  background: var(--bg-2);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.photo-item img {
+  display: block;
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.photo-meta { padding: 8px 10px; }
+.photo-meta p { margin: 0 0 6px; font-size: 0.9rem; overflow-wrap: anywhere; }
+.photo-meta .photo-year { color: var(--muted); }
+
+/* Checklist */
+
+.checklist {
+  list-style: none;
+  margin: 0 0 14px;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.checklist li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: var(--bg-2);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+}
+
+.checklist input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  accent-color: var(--orange);
+  cursor: pointer;
+}
+
+.checklist li.done label { text-decoration: line-through; color: var(--muted); }
+.checklist label { flex: 1; cursor: pointer; }
+
+.inline-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.inline-form input { flex: 1; }
+
+/* Footer */
+
+.site-footer {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 8px 18px 28px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ghost { animation: none; }
+}

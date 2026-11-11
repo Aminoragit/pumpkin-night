@@ -1,0 +1,1 @@
+{"hooks":[{"description":"When an app file is saved, run a quick syntax check on app.js and confirm the page files exist.","match":["app.js","index.html","styles.css"],"name":"check-on-save","run":"node --check app.js && test -f index.html && test -f styles.css && echo OK","when":"onSave"}],"version":1}

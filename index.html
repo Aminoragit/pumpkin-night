@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pumpkin Night — Family Halloween Night Planner</title>
+<meta name="description" content="Plan a family Halloween night: trick-or-treat route, costume ideas, photo album, and a packing checklist. Everything is stored in your browser.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="brand">
+    <!-- Pumpkin mark, drawn inline so the page needs no external images -->
+    <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+      <path d="M32 14c-2-6 2-10 6-12 1 5-1 9-6 12z" fill="#3f9e4d"/>
+      <path d="M32 16c-14-4-28 4-28 16 0 12 12 20 28 20s28-8 28-20c0-12-14-20-28-16z" fill="#ff7a1a"/>
+      <path d="M32 16c-4 0-6 12-6 20s2 16 6 16 6-8 6-16-2-20-6-20z" fill="#e5640a" opacity="0.55"/>
+      <path d="M22 28l4-3 4 3-4 6zM38 28l4-3 4 3-4 6z" fill="#1c0b26"/>
+      <path d="M22 40c3 3 7 4 10 4s7-1 10-4l-2 2c-2 2-5 3-8 3s-6-1-8-3z" fill="#1c0b26"/>
+    </svg>
+    <div>
+      <h1>Pumpkin Night</h1>
+      <p class="tagline">Family Halloween night planner: route, costumes, photos, checklist.</p>
+    </div>
+    <!-- Floating ghost -->
+    <svg class="ghost" viewBox="0 0 48 56" aria-hidden="true">
+      <path d="M24 4c-9 0-16 7-16 16v28l5-5 5 5 6-6 6 6 5-5 5 5V20C40 11 33 4 24 4z" fill="#f2ecff"/>
+      <circle cx="17" cy="22" r="3" fill="#1c0b26"/>
+      <circle cx="31" cy="22" r="3" fill="#1c0b26"/>
+      <ellipse cx="24" cy="31" rx="4" ry="5" fill="#1c0b26"/>
+    </svg>
+  </div>
+
+  <div class="countdown" role="timer" aria-live="off" aria-label="Countdown to Halloween">
+    <p class="countdown-label">Halloween starts in</p>
+    <div class="countdown-numbers">
+      <div class="countdown-unit"><span id="cd-days">–</span><small>days</small></div>
+      <div class="countdown-unit"><span id="cd-hours">–</span><small>hours</small></div>
+      <div class="countdown-unit"><span id="cd-minutes">–</span><small>minutes</small></div>
+      <div class="countdown-unit"><span id="cd-seconds">–</span><small>seconds</small></div>
+    </div>
+    <p class="countdown-target" id="cd-target"></p>
+  </div>
+</header>
+
+<main>
+  <!-- 1. Trick-or-treat route planner -->
+  <section class="card" id="route-section" aria-labelledby="route-heading">
+    <h2 id="route-heading">🎃 Trick-or-treat route</h2>
+    <p class="section-note">Add each house or stop on your route. Times add up so you can see how long the night will take.</p>
+    <form id="stop-form" class="form-grid">
+      <div class="field">
+        <label for="stop-name">Stop name</label>
+        <input id="stop-name" type="text" placeholder="e.g. The Johnsons' house" required maxlength="80" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="stop-minutes">Minutes here</label>
+        <input id="stop-minutes" type="number" min="1" max="120" value="10" required>
+      </div>
+      <div class="field">
+        <label for="stop-note">Note</label>
+        <input id="stop-note" type="text" placeholder="e.g. Best candy on the street" maxlength="120" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="stop-safety">Safety note</label>
+        <input id="stop-safety" type="text" placeholder="e.g. Lit porch, flat driveway" maxlength="120" autocomplete="off">
+      </div>
+      <button type="submit" class="btn">Add stop</button>
+    </form>
+    <p class="total" id="route-total">No stops yet. Total route time: 0 minutes.</p>
+    <ol id="stop-list" class="stop-list"></ol>
+  </section>
+
+  <!-- 2. Costume idea matcher -->
+  <section class="card" id="costume-section" aria-labelledby="costume-heading">
+    <h2 id="costume-heading">👻 Costume matcher</h2>
+    <p class="section-note">Add everyone going out, pick an age group and one interest each. The matcher suggests family themes and a costume for each person.</p>
+    <form id="member-form" class="form-grid">
+      <div class="field">
+        <label for="member-name">Name</label>
+        <input id="member-name" type="text" placeholder="e.g. Mina" required maxlength="40" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="member-age">Age group</label>
+        <select id="member-age">
+          <option value="child">Child</option>
+          <option value="teen">Teen</option>
+          <option value="adult">Adult</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="member-tag">Interest</label>
+        <select id="member-tag">
+          <option value="spooky">Spooky</option>
+          <option value="funny">Funny</option>
+          <option value="hero">Hero</option>
+          <option value="animal">Animal</option>
+          <option value="classic">Classic</option>
+          <option value="movie">Movie</option>
+        </select>
+      </div>
+      <button type="submit" class="btn">Add member</button>
+    </form>
+    <ul id="member-list" class="member-list"></ul>
+    <h3>Family theme ideas</h3>
+    <p class="empty-note" id="theme-empty">Add family members above and matching themes will show here.</p>
+    <div id="theme-results" class="theme-grid"></div>
+    <h3>Costume ideas for each person</h3>
+    <div id="member-ideas" class="idea-list"></div>
+  </section>
+
+  <!-- 3. Photo memory album -->
+  <section class="card" id="album-section" aria-labelledby="album-heading">
+    <h2 id="album-heading">📸 Photo memory album</h2>
+    <p class="section-note">Save photos from past Halloweens. Photos are shrunk to small thumbnails before they are saved, so they fit in the browser's storage.</p>
+    <form id="photo-form" class="form-grid">
+      <div class="field">
+        <label for="photo-file">Photo</label>
+        <input id="photo-file" type="file" accept="image/*" required>
+      </div>
+      <div class="field">
+        <label for="photo-caption">Caption</label>
+        <input id="photo-caption" type="text" placeholder="e.g. First pumpkin carving" maxlength="120" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="photo-year">Year</label>
+        <input id="photo-year" type="number" min="1900" max="2100" value="2026">
+      </div>
+      <button type="submit" class="btn">Add photo</button>
+    </form>
+    <p class="storage-note" id="photo-count">No photos saved yet.</p>
+    <div id="photo-grid" class="photo-grid"></div>
+  </section>
+
+  <!-- 4. Night-of checklist -->
+  <section class="card" id="checklist-section" aria-labelledby="checklist-heading">
+    <h2 id="checklist-heading">✅ Night-of checklist</h2>
+    <p class="section-note">Tick things off as you pack. Your checks are saved.</p>
+    <p class="total" id="checklist-progress">0 of 0 packed.</p>
+    <ul id="checklist" class="checklist"></ul>
+    <form id="check-item-form" class="inline-form">
+      <label for="custom-item" class="visually-hidden">Add your own checklist item</label>
+      <input id="custom-item" type="text" placeholder="Add your own item…" maxlength="80" autocomplete="off">
+      <button type="submit" class="btn btn-small">Add item</button>
+    </form>
+    <button type="button" id="reset-checklist" class="btn btn-ghost">Reset checklist</button>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>Pumpkin Night — built for Kiroween 2026. All data stays in this browser (localStorage). No account, no server, no tracking.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

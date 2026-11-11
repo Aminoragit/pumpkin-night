@@ -1,0 +1,5 @@
+# Pumpkin Night — dependencies and editor files.
+# .kiro is intentionally NOT ignored: the hackathon rules require it in the repo.
+node_modules/
+.DS_Store
+*.log
